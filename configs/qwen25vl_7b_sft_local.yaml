@@ -1,0 +1,44 @@
+# Local SFT config for a single RTX 4090 without wandb.
+
+# Model arguments
+model_name_or_path: /mnt/VLM_grounding/models/qwen25vl-7b
+model_revision: main
+torch_dtype: bfloat16
+
+# Data arguments
+dataset_name: /mnt/VLM_grounding/configs/rec_local.yaml
+image_root: /mnt/VLM_grounding/data/coco/train2014
+dataset_configs:
+- all
+preprocessing_num_workers: 4
+
+# Trainer config
+bf16: true
+do_eval: false
+eval_strategy: "no"
+gradient_accumulation_steps: 8
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+learning_rate: 1.0e-05
+log_level: info
+logging_steps: 5
+logging_strategy: steps
+lr_scheduler_type: cosine
+packing: true
+max_seq_length: 4096
+max_steps: -1
+num_train_epochs: 3
+output_dir: /mnt/VLM_grounding/outputs/sft-qwen25vl-7b-local
+overwrite_output_dir: true
+per_device_eval_batch_size: 1
+per_device_train_batch_size: 2
+push_to_hub: false
+report_to:
+- none
+save_strategy: steps
+save_steps: 100
+save_total_limit: 2
+seed: 42
+data_seed: 42
+warmup_ratio: 0.1

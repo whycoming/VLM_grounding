@@ -1,0 +1,26 @@
+[
+  {
+    "file": "rec_results_refcoco_val_phase3-rft-qwen25vl-7b-local_checkpoint-3000.json",
+    "dataset": "refcoco_val_phase3-rft-qwen25vl-7b-local",
+    "num_samples": 2000,
+    "acc@0.5": 0.906,
+    "acc@0.75": 0.793,
+    "mean_iou": 0.7998337491932449
+  },
+  {
+    "file": "rec_results_refcocog_val_phase3-rft-qwen25vl-7b-local_checkpoint-3000.json",
+    "dataset": "refcocog_val_phase3-rft-qwen25vl-7b-local",
+    "num_samples": 2000,
+    "acc@0.5": 0.8645,
+    "acc@0.75": 0.7415,
+    "mean_iou": 0.7695365999195429
+  },
+  {
+    "file": "rec_results_refcocop_val_phase3-rft-qwen25vl-7b-local_checkpoint-3000.json",
+    "dataset": "refcocop_val_phase3-rft-qwen25vl-7b-local",
+    "num_samples": 2000,
+    "acc@0.5": 0.8485,
+    "acc@0.75": 0.7425,
+    "mean_iou": 0.7531401205376569
+  }
+]

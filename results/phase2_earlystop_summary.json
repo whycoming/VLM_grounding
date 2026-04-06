@@ -1,0 +1,26 @@
+[
+  {
+    "file": "rec_results_refcoco_val_sft-qwen25vl-7b-local_checkpoint-4800.json",
+    "dataset": "refcoco_val_sft-qwen25vl-7b-local",
+    "num_samples": 2000,
+    "acc@0.5": 0.9205,
+    "acc@0.75": 0.812,
+    "mean_iou": 0.8263672414433323
+  },
+  {
+    "file": "rec_results_refcocog_val_sft-qwen25vl-7b-local_checkpoint-4800.json",
+    "dataset": "refcocog_val_sft-qwen25vl-7b-local",
+    "num_samples": 2000,
+    "acc@0.5": 0.876,
+    "acc@0.75": 0.761,
+    "mean_iou": 0.7917647446380469
+  },
+  {
+    "file": "rec_results_refcocop_val_sft-qwen25vl-7b-local_checkpoint-4800.json",
+    "dataset": "refcocop_val_sft-qwen25vl-7b-local",
+    "num_samples": 2000,
+    "acc@0.5": 0.8615,
+    "acc@0.75": 0.7715,
+    "mean_iou": 0.7804416699256077
+  }
+]

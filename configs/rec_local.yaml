@@ -1,0 +1,4 @@
+datasets:
+  - json_path: /mnt/VLM_grounding/data/rec_jsons_processed/rec_jsons_processed/refcoco_train.jsonl
+  - json_path: /mnt/VLM_grounding/data/rec_jsons_processed/rec_jsons_processed/refcocop_train.jsonl
+  - json_path: /mnt/VLM_grounding/data/rec_jsons_processed/rec_jsons_processed/refcocog_train.jsonl

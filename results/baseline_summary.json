@@ -1,0 +1,26 @@
+[
+  {
+    "file": "rec_results_refcoco_val_qwen25vl-3b.json",
+    "dataset": "refcoco_val",
+    "num_samples": 2000,
+    "acc@0.5": 0.8895,
+    "acc@0.75": 0.7865,
+    "mean_iou": 0.81920572577554
+  },
+  {
+    "file": "rec_results_refcocog_val_qwen25vl-3b.json",
+    "dataset": "refcocog_val",
+    "num_samples": 2000,
+    "acc@0.5": 0.865,
+    "acc@0.75": 0.757,
+    "mean_iou": 0.7956004222755235
+  },
+  {
+    "file": "rec_results_refcocop_val_qwen25vl-3b.json",
+    "dataset": "refcocop_val",
+    "num_samples": 2000,
+    "acc@0.5": 0.823,
+    "acc@0.75": 0.7435,
+    "mean_iou": 0.7673393880405969
+  }
+]

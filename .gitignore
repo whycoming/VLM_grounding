@@ -1,0 +1,24 @@
+# Local environments
+.venv/
+__pycache__/
+*.pyc
+
+# Large local assets
+data/
+models/
+artifacts/lora/
+
+# Training and eval outputs
+outputs/
+logs/
+
+# Large binary artifacts
+*.safetensors
+*.pt
+*.pth
+*.bin
+
+# Local tool state
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
