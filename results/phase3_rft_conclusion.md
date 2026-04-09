@@ -5,6 +5,7 @@
 - This conclusion is based on reproducible evaluation files and deterministic post-processing scripts.
 - The failure diagnosis remains heuristic. In particular, `LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET` is still a conservative proxy bucket.
 - The training loop reached `global_step=3000` and produced a usable final checkpoint, but the original `sft.py` had a post-training metrics bug. The checkpoint itself is valid.
+- **Scheduler caveat**: this RFT run was launched via `run_rft_phase3_local.sh`, which (like the Phase 2 launcher, now fixed) did not pass `--lr_scheduler_type` / `--warmup_ratio`. Training used the trainer default `linear` scheduler with `warmup_ratio=0`. The scheduler does not explain this negative result — the regression mechanism (self-filtered easy samples + source coverage limited to `refcoco_train`, causing cross-split generalization loss) is orthogonal to the scheduler. The decision to de-prioritize the current RFT configuration stands, but when RFT is revisited it should be rerun under the corrected schedule from a corrected Phase 2 base checkpoint to keep the comparison clean.
 
 ## Phase 3 RFT Result
 

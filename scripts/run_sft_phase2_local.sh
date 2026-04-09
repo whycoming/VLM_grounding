@@ -18,6 +18,8 @@ python -m open_r1.sft \
   --gradient_accumulation_steps 8 \
   --num_train_epochs 3 \
   --learning_rate 1e-5 \
+  --lr_scheduler_type cosine \
+  --warmup_ratio 0.1 \
   --logging_strategy steps \
   --logging_steps 5 \
   --save_strategy steps \

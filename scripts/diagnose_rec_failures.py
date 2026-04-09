@@ -47,7 +47,6 @@ def classify_failure(result):
     pred_box = result["extracted_answer"]
     gt_box = result["ground_truth"]
     description = result["question"]
-    raw_output = result["model_output"]
     pred_valid = parse_valid_bbox(pred_box)
 
     if not pred_valid or pred_box == [0, 0, 0, 0]:
@@ -69,9 +68,6 @@ def classify_failure(result):
     # separate wrong-target from attribute misunderstanding.
     if sample_iou < 0.1:
         return "LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET"
-
-    if "[" not in raw_output or "]" not in raw_output:
-        return "FORMAT_ERROR"
 
     return "ATTRIBUTE_OR_OTHER"
 

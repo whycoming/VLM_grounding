@@ -3,8 +3,18 @@ set -euo pipefail
 
 source /mnt/VLM_grounding/.venv/bin/activate
 
-BASE_ADAPTER_PATH="${BASE_ADAPTER_PATH:-/mnt/VLM_grounding/outputs/sft-qwen25vl-7b-local/checkpoint-4800}"
-MERGED_MODEL_PATH="${MERGED_MODEL_PATH:-/mnt/VLM_grounding/models/qwen25vl-7b-phase2-merged-4800}"
+SFT_OUTPUT_DIR="${SFT_OUTPUT_DIR:-/mnt/VLM_grounding/outputs/sft-qwen25vl-7b-local}"
+if [ -z "${BASE_ADAPTER_PATH:-}" ]; then
+  LATEST_CKPT=$(ls -d "${SFT_OUTPUT_DIR}"/checkpoint-* 2>/dev/null \
+    | awk -F- '{print $NF" "$0}' | sort -n | tail -n1 | awk '{print $2}')
+  if [ -z "${LATEST_CKPT}" ]; then
+    echo "No checkpoint-* found under ${SFT_OUTPUT_DIR}" >&2
+    exit 1
+  fi
+  BASE_ADAPTER_PATH="${LATEST_CKPT}"
+fi
+CKPT_TAG="$(basename "${BASE_ADAPTER_PATH}" | sed 's/checkpoint-//')"
+MERGED_MODEL_PATH="${MERGED_MODEL_PATH:-/mnt/VLM_grounding/models/qwen25vl-7b-phase2-merged-${CKPT_TAG}}"
 GENERATION_MODEL_PATH="${GENERATION_MODEL_PATH:-${MERGED_MODEL_PATH}}"
 TRAIN_JSONL="${TRAIN_JSONL:-/mnt/VLM_grounding/data/rec_jsons_processed/rec_jsons_processed/refcoco_train.jsonl}"
 IMAGE_ROOT="${IMAGE_ROOT:-/mnt/VLM_grounding/data/coco}"

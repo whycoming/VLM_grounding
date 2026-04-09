@@ -5,6 +5,7 @@
 - This conclusion is based on reproducible evaluation files and deterministic post-processing scripts.
 - The failure diagnosis remains heuristic. In particular, `LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET` is still a conservative proxy bucket.
 - Phase 2 was early-stopped at `checkpoint-4800` instead of running the planned full `3` epochs.
+- **Scheduler caveat**: this SFT run used the trainer default `linear` scheduler with `warmup_ratio=0`, not the `cosine + warmup_ratio=0.1` declared in `configs/qwen25vl_7b_sft_local.yaml`. The YAML was never loaded — `run_sft_phase2_local.sh` drove training via CLI flags only, and those flags omitted `--lr_scheduler_type` / `--warmup_ratio`. The script has since been fixed, but `checkpoint-4800` itself was produced under the suboptimal schedule. Treat the Phase 2 numbers as a conservative lower bound for SFT; a rerun with the corrected schedule may push SFT higher and, in turn, shift the early-stop decision. The qualitative finding (`COORDINATE_IMPRECISION` dominates the residual error) is robust to the scheduler choice because the bucket-wise shrinkage gap is much larger than any plausible scheduler delta.
 
 ## Phase 2 Result
 

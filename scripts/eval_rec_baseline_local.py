@@ -140,8 +140,8 @@ def main():
             for j, output_text in enumerate(batch_output_text):
                 input_height = int(inputs["image_grid_thw"][j][1] * 14)
                 input_width = int(inputs["image_grid_thw"][j][2] * 14)
-                image = Image.open(batch_messages[j][0]["content"][0]["image"].split("file://")[1])
-                image_width, image_height = image.size
+                with Image.open(batch_messages[j][0]["content"][0]["image"].split("file://")[1]) as image:
+                    image_width, image_height = image.size
                 outputs.append((output_text, input_height, input_width, image_height, image_width))
 
         final_output = []

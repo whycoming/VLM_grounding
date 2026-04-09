@@ -144,8 +144,8 @@ def main():
         )
 
         prompt_len = inputs.input_ids.shape[1]
-        image = Image.open(image_path)
-        image_width, image_height = image.size
+        with Image.open(image_path) as image:
+            image_width, image_height = image.size
         input_height = int(inputs["image_grid_thw"][0][1] * 14)
         input_width = int(inputs["image_grid_thw"][0][2] * 14)
         seen = set()

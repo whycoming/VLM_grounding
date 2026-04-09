@@ -6,7 +6,7 @@ source /mnt/VLM_grounding/.venv/bin/activate
 MODEL_PATH="${MODEL_PATH:-/mnt/VLM_grounding/models/qwen25vl-3b}"
 DATA_ROOT="${DATA_ROOT:-/mnt/VLM_grounding/data/rec_jsons_processed/rec_jsons_processed}"
 IMAGE_ROOT="${IMAGE_ROOT:-/mnt/VLM_grounding/data/coco}"
-OUTPUT_DIR="${OUTPUT_DIR:-/mnt/VLM_grounding/outputs/eval-baseline}"
+OUTPUT_DIR="${OUTPUT_DIR:-/mnt/VLM_grounding/outputs/eval-baseline-3b}"
 NUM_SAMPLES="${NUM_SAMPLES:-100}"
 BATCH_SIZE="${BATCH_SIZE:-2}"
 
