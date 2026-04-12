@@ -14,9 +14,10 @@ class Qwen2VLModule(VLMBaseModule):
         return "qwen"
 
     def get_model_class(self, model_id: str, model_init_kwargs: dict):
-        if "Qwen2-VL" in model_id:
+        model_id_lower = model_id.lower()
+        if "qwen2-vl" in model_id_lower:
             model_cls = Qwen2VLForConditionalGeneration
-        elif "Qwen2.5-VL" in model_id:
+        elif "qwen2.5-vl" in model_id_lower or "qwen25vl" in model_id_lower:
             model_cls = Qwen2_5_VLForConditionalGeneration
         else:
             raise ValueError(f"Unsupported model: {model_id}")
@@ -133,16 +134,33 @@ class Qwen2VLModule(VLMBaseModule):
         current_time = datetime.now().strftime("%d-%H-%M-%S-%f")
         answer_tag_pattern = r'<answer>(.*?)</answer>'
         bbox_pattern = r'\[(\d+),\s*(\d+),\s*(\d+),\s*(\d+)]'
+        image_grid_thw_list = kwargs.get("image_grid_thw")
+        image_path_list = kwargs.get("image_path")
+        image_list = kwargs.get("image")
 
         for i, (content, sol) in enumerate(zip(contents, solution)):
-            image_grid_thw = kwargs.get("image_grid_thw")[i]
-            image_path = kwargs.get("image_path")[i][0]
-            image = Image.open(image_path)
+            image_grid_thw = image_grid_thw_list[i]
+
+            image_path = None
+            if image_path_list is not None and image_path_list[i] is not None:
+                image_path = image_path_list[i][0] if isinstance(image_path_list[i], list) else image_path_list[i]
+
+            if image_path is not None:
+                image = Image.open(image_path)
+            elif image_list is not None and image_list[i] is not None:
+                image = image_list[i][0] if isinstance(image_list[i], list) else image_list[i]
+            else:
+                rewards.append(0.0)
+                continue
+
             image_width, image_height = image.size
             input_height = int(image_grid_thw[1]*14)
             input_width = int(image_grid_thw[2]*14)
             
-            sol = re.findall(answer_tag_pattern, sol, re.DOTALL)[-1]
+            if not isinstance(sol, str):
+                sol = json.dumps(sol)
+            sol_match = re.findall(answer_tag_pattern, sol, re.DOTALL)
+            sol = sol_match[-1] if sol_match else sol
             sol = json.loads(sol.strip())
             reward = 0.0
             # Try symbolic verification first

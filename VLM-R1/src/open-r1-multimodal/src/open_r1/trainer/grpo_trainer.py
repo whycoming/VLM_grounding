@@ -247,12 +247,14 @@ class VLMGRPOTrainer(Trainer):
                 "Invalid `torch_dtype` passed to `GRPOConfig`. Expected either 'auto' or a string representing "
                 f"a `torch.dtype` (e.g., 'float32'), but got {torch_dtype}."
             )
-        # Disable caching if gradient checkpointing is enabled (not supported)
-        model_init_kwargs["use_cache"] = (
-            False if args.gradient_checkpointing else model_init_kwargs.get("use_cache")
-        )
+        # Disable caching if gradient checkpointing is enabled (not supported).
+        # Keep this out of from_pretrained kwargs because some model classes reject it in __init__.
+        use_cache = False if args.gradient_checkpointing else model_init_kwargs.get("use_cache")
+        model_init_kwargs.pop("use_cache", None)
         model_cls = self.vlm_module.get_model_class(model_id, model_init_kwargs)
         model = model_cls.from_pretrained(model_id, **model_init_kwargs)
+        if use_cache is not None:
+            model.config.use_cache = use_cache
 
         # LoRA
         self.vision_modules_keywords = self.vlm_module.get_vision_modules_keywords()
@@ -395,6 +397,8 @@ class VLMGRPOTrainer(Trainer):
         # "Could not estimate the number of tokens of the input, floating-point operations will not be computed." To
         # suppress this warning, we set the "estimate_tokens" key in the model's "warnings_issued" dictionary to True.
         # This acts as a flag to indicate that the warning has already been issued.
+        if not hasattr(model, "warnings_issued") or model.warnings_issued is None:
+            model.warnings_issued = {}
         model.warnings_issued["estimate_tokens"] = True
 
         # Initialize the metrics
@@ -844,8 +848,10 @@ class VLMGRPOTrainer(Trainer):
 
         model_card.save(os.path.join(self.args.output_dir, "README.md"))
 
-    def _get_train_sampler(self) -> Sampler:
+    def _get_train_sampler(self, train_dataset=None) -> Sampler:
         """Returns a sampler that ensures proper data sampling for GRPO training."""
+        if train_dataset is None:
+            train_dataset = self.train_dataset
         effective_batch_size = (
             self.args.per_device_train_batch_size
             * self.accelerator.num_processes
@@ -853,7 +859,7 @@ class VLMGRPOTrainer(Trainer):
         )
         
         return RepeatRandomSampler(
-            data_source=self.train_dataset,
+            data_source=train_dataset,
             mini_repeat_count=self.num_generations,
             batch_size=effective_batch_size // self.num_generations,
             repeat_count=self.num_iterations,

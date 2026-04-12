@@ -1,0 +1,1 @@
+{"image":"train2014/COCO_train2014_000000581857.jpg","prompt":"<image>Please provide the bounding box coordinate of the region this sentence describes: the lady with the blue shirt.","chosen":[103.93,299.99,238.15,477.41],"rejected":[216.58,261.7,298.22,473.59],"chosen_iou":1.0,"rejected_iou":0.105,"iou_gap":0.895,"ref_chosen_logps":-1.0,"ref_rejected_logps":-2.0}

@@ -1,0 +1,26 @@
+[
+  {
+    "file": "rec_results_refcoco_val_outputs_phase3-hard-negative-dpo-qwen25vl-7b-local-rerun1.json",
+    "dataset": "refcoco_val_outputs",
+    "num_samples": 2000,
+    "acc@0.5": 0.915,
+    "acc@0.75": 0.7985,
+    "mean_iou": 0.8176305683375467
+  },
+  {
+    "file": "rec_results_refcocog_val_outputs_phase3-hard-negative-dpo-qwen25vl-7b-local-rerun1.json",
+    "dataset": "refcocog_val_outputs",
+    "num_samples": 2000,
+    "acc@0.5": 0.877,
+    "acc@0.75": 0.7575,
+    "mean_iou": 0.7894607700195553
+  },
+  {
+    "file": "rec_results_refcocop_val_outputs_phase3-hard-negative-dpo-qwen25vl-7b-local-rerun1.json",
+    "dataset": "refcocop_val_outputs",
+    "num_samples": 2000,
+    "acc@0.5": 0.8585,
+    "acc@0.75": 0.7715,
+    "mean_iou": 0.7789712097091518
+  }
+]

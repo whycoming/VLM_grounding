@@ -1,0 +1,952 @@
+{
+  "overall_counts": {
+    "CORRECT": 5249,
+    "FORMAT_ERROR": 83,
+    "LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET": 193,
+    "SPATIAL_REASONING_ERROR": 124,
+    "COORDINATE_IMPRECISION": 224,
+    "ATTRIBUTE_OR_OTHER": 127
+  },
+  "per_dataset_counts": {
+    "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json": {
+      "CORRECT": 1819,
+      "FORMAT_ERROR": 33,
+      "LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET": 19,
+      "SPATIAL_REASONING_ERROR": 43,
+      "COORDINATE_IMPRECISION": 64,
+      "ATTRIBUTE_OR_OTHER": 22
+    },
+    "rec_results_refcocog_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json": {
+      "CORRECT": 1737,
+      "COORDINATE_IMPRECISION": 87,
+      "FORMAT_ERROR": 26,
+      "SPATIAL_REASONING_ERROR": 46,
+      "ATTRIBUTE_OR_OTHER": 46,
+      "LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET": 58
+    },
+    "rec_results_refcocop_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json": {
+      "CORRECT": 1693,
+      "LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET": 116,
+      "FORMAT_ERROR": 24,
+      "COORDINATE_IMPRECISION": 73,
+      "SPATIAL_REASONING_ERROR": 35,
+      "ATTRIBUTE_OR_OTHER": 59
+    }
+  },
+  "example_failures": {
+    "FORMAT_ERROR": [
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000289782.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: red truck on right.",
+        "ground_truth": [
+          483.74,
+          79.34,
+          640.0,
+          364.01
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[481, 79, six four two, five three one]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000493114.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: lady in green shirt.",
+        "ground_truth": [
+          451.24,
+          0.0,
+          609.02,
+          420.74
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[451, 0, six one eight, 427]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000383917.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: bus in the back on the right.",
+        "ground_truth": [
+          497.21,
+          177.27,
+          640.0,
+          359.94
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[497, 173, six four two, 402]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000387256.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: girl on righ.",
+        "ground_truth": [
+          308.95,
+          30.7,
+          607.34,
+          421.2
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[307, 31, sixo, 422]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000538633.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: woman.",
+        "ground_truth": [
+          251.69,
+          45.77,
+          633.16,
+          391.29
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[253, 44, six三o, 400]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000084800.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: far right person.",
+        "ground_truth": [
+          483.24,
+          20.31,
+          640.0,
+          407.55
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[483, 25, six four, 639]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000088647.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: right couch.",
+        "ground_truth": [
+          495.34,
+          159.06,
+          638.78,
+          293.68
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[497, 165, six four two, three eight five]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000147753.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: guy far right.",
+        "ground_truth": [
+          505.31,
+          159.69,
+          640.0,
+          478.87
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[502, 161, six four two, 500]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000425825.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: dark right of fridge.",
+        "ground_truth": [
+          369.97,
+          16.92,
+          418.0,
+          552.27
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[ thirty seven , 25, 427, 548]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000162551.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: right food.",
+        "ground_truth": [
+          222.2,
+          10.53,
+          640.0,
+          421.26
+        ],
+        "prediction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "model_output": "```json\n[215, 13, six four eight, 420]\n```"
+      }
+    ],
+    "LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET": [
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000484206.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: elephant farthest ahead.",
+        "ground_truth": [
+          292.93,
+          109.59,
+          456.27,
+          202.13
+        ],
+        "prediction": [
+          92.4223602484472,
+          146.6813186813187,
+          314.0372670807453,
+          222.0879120879121
+        ],
+        "model_output": "```json\n[93, 142, 316, 215]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000317573.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: coffee mug.",
+        "ground_truth": [
+          47.25,
+          228.83,
+          164.3,
+          343.73
+        ],
+        "prediction": [
+          337.888198757764,
+          389.2436974789916,
+          547.5776397515527,
+          483.0252100840336
+        ],
+        "model_output": "```json\n[340, 386, 551, 479]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000500662.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: the suitcase on the table.",
+        "ground_truth": [
+          319.17,
+          61.51,
+          500.36,
+          222.75
+        ],
+        "prediction": [
+          49.70238095238095,
+          307.0807453416149,
+          338.97023809523813,
+          523.7267080745341
+        ],
+        "model_output": "```json\n[50, 309, 341, 527]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000108375.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: woman at bottom of frame brown shirt.",
+        "ground_truth": [
+          488.61,
+          215.64,
+          640.0,
+          410.8
+        ],
+        "prediction": [
+          123.22981366459628,
+          203.33333333333331,
+          304.0993788819876,
+          434.1166666666666
+        ],
+        "model_output": "```json\n[124, 200, 306, 427]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000221053.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: table in the back.",
+        "ground_truth": [
+          0.0,
+          265.96,
+          208.14,
+          365.87
+        ],
+        "prediction": [
+          238.50931677018633,
+          288.4033613445378,
+          428.3229813664596,
+          478.99159663865544
+        ],
+        "model_output": "```json\n[240, 286, 431, 475]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000140733.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: last plane.",
+        "ground_truth": [
+          41.35,
+          88.96,
+          241.39,
+          255.33
+        ],
+        "prediction": [
+          139.1304347826087,
+          218.58333333333331,
+          336.8944099378882,
+          393.45
+        ],
+        "model_output": "```json\n[140, 215, 339, 387]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000231320.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: yellow faced clock on bottom.",
+        "ground_truth": [
+          291.56,
+          411.21,
+          441.47,
+          573.49
+        ],
+        "prediction": [
+          58.616883116883116,
+          433.16883116883116,
+          239.43506493506493,
+          554.3766233766235
+        ],
+        "model_output": "```json\n[59, 436, 241, 558]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000495344.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: yep.",
+        "ground_truth": [
+          379.6,
+          305.98,
+          601.89,
+          426.0
+        ],
+        "prediction": [
+          217.63975155279502,
+          210.9714285714286,
+          344.8447204968944,
+          400.6428571428571
+        ],
+        "model_output": "```json\n[219, 208, 347, 395]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000149921.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: head person at table.",
+        "ground_truth": [
+          115.97,
+          161.18,
+          370.47,
+          470.44
+        ],
+        "prediction": [
+          387.5776397515528,
+          133.109243697479,
+          533.6645962732919,
+          409.4117647058823
+        ],
+        "model_output": "```json\n[390, 132, 537, 406]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000087248.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: pink shirt jeans girl.",
+        "ground_truth": [
+          389.74,
+          53.91,
+          537.1,
+          382.62
+        ],
+        "prediction": [
+          155.03105590062114,
+          63.346938775510196,
+          245.46583850931677,
+          390.96938775510205
+        ],
+        "model_output": "```json\n[156, 64, 247, 395]\n```"
+      }
+    ],
+    "SPATIAL_REASONING_ERROR": [
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000551710.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: man in right front with blue tie next to older woman.",
+        "ground_truth": [
+          565.58,
+          131.61,
+          640.0,
+          390.45
+        ],
+        "prediction": [
+          361.73913043478257,
+          129.07563025210084,
+          436.27329192546586,
+          378.1512605042017
+        ],
+        "model_output": "```json\n[364, 128, 439, 375]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000204529.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: third wine glass from the left.",
+        "ground_truth": [
+          400.79,
+          131.86,
+          489.04,
+          349.62
+        ],
+        "prediction": [
+          300.12422360248445,
+          155.29411764705884,
+          393.54037267080747,
+          406.38655462184875
+        ],
+        "model_output": "```json\n[302, 154, 396, 403]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000264741.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: bottom right corner couch cushion.",
+        "ground_truth": [
+          0.0,
+          440.9,
+          134.25,
+          610.68
+        ],
+        "prediction": [
+          442.1103896103896,
+          336.7987012987013,
+          608.025974025974,
+          601.0714285714286
+        ],
+        "model_output": "```json\n[445 , 339, 612, 605]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000392631.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: green bananans left side middle.",
+        "ground_truth": [
+          63.63,
+          223.77,
+          288.45,
+          390.02
+        ],
+        "prediction": [
+          131.0924369747899,
+          272.29813664596276,
+          317.6470588235294,
+          585.3416149068323
+        ],
+        "model_output": "```json\n[130, 274, 315, 589]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000428109.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: top third from left banana.",
+        "ground_truth": [
+          242.88,
+          0.0,
+          471.6,
+          145.82
+        ],
+        "prediction": [
+          161.94155844155844,
+          4.967532467532467,
+          326.8636363636363,
+          165.91558441558442
+        ],
+        "model_output": "```json\n[163, 5, 329, 167]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000295294.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: red fruit middle between oranges.",
+        "ground_truth": [
+          175.75,
+          196.84,
+          306.15,
+          339.85
+        ],
+        "prediction": [
+          180.50420168067228,
+          102.36024844720497,
+          392.2689075630252,
+          310.0621118012423
+        ],
+        "model_output": "```json\n[179, 103, 389, 312]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000561624.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: woman in the right of the stands with her hands crossed.",
+        "ground_truth": [
+          456.88,
+          94.22,
+          557.12,
+          277.36
+        ],
+        "prediction": [
+          346.83229813664593,
+          106.75,
+          423.35403726708074,
+          287.7166666666667
+        ],
+        "model_output": "```json\n[349, 105, 426, 283]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000226552.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: left apple.",
+        "ground_truth": [
+          13.55,
+          33.88,
+          206.68,
+          250.73
+        ],
+        "prediction": [
+          163.9751552795031,
+          201.68067226890756,
+          321.9875776397515,
+          273.2773109243697
+        ],
+        "model_output": "```json\n[165, 200, 324, 271]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000326823.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: in back pizza on left upper corner.",
+        "ground_truth": [
+          2.88,
+          2.88,
+          148.13,
+          307.78
+        ],
+        "prediction": [
+          144.2016806722689,
+          131.1801242236025,
+          398.31932773109247,
+          234.53416149068323
+        ],
+        "model_output": "```json\n[143, 132, 395, 236]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000218447.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: right sides pc of broccoli with a grain of spice on it.",
+        "ground_truth": [
+          491.08,
+          248.59,
+          609.44,
+          429.0
+        ],
+        "prediction": [
+          406.45962732919253,
+          36.77142857142857,
+          543.6024844720497,
+          171.60000000000002
+        ],
+        "model_output": "```json\n[409, 36, 547, 168]\n```"
+      }
+    ],
+    "COORDINATE_IMPRECISION": [
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000080634.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: left side of pizza.",
+        "ground_truth": [
+          147.1,
+          58.23,
+          328.48,
+          326.55
+        ],
+        "prediction": [
+          149.06832298136646,
+          60.857142857142854,
+          420.37267080745346,
+          424.98571428571427
+        ],
+        "model_output": "```json\n[150, 60, 423, 419]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000498938.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: striped leg left.",
+        "ground_truth": [
+          0.0,
+          0.0,
+          638.53,
+          395.58
+        ],
+        "prediction": [
+          0.0,
+          1.0229591836734693,
+          191.80124223602485,
+          395.88520408163265
+        ],
+        "model_output": "```json\n[0, 1, 193, 387]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000554699.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: hot dogs far left.",
+        "ground_truth": [
+          0.0,
+          41.52,
+          134.78,
+          314.62
+        ],
+        "prediction": [
+          0.0,
+          69.57983193277312,
+          74.53416149068323,
+          199.6638655462185
+        ],
+        "model_output": "```json\n[0, 69, 75, 198]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000267871.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: middle chair in back row.",
+        "ground_truth": [
+          247.83,
+          354.32,
+          405.1,
+          480.0
+        ],
+        "prediction": [
+          276.27329192546586,
+          318.65546218487395,
+          381.6149068322982,
+          408.4033613445378
+        ],
+        "model_output": "```json\n[278, 316, 384, 405]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000344338.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: front left piece of sandwich.",
+        "ground_truth": [
+          83.48,
+          105.55,
+          355.03,
+          358.87
+        ],
+        "prediction": [
+          73.54037267080744,
+          141.31666666666666,
+          203.72670807453417,
+          367.0166666666667
+        ],
+        "model_output": "```json\n[74, 139, 205, 361]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000481804.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: head with black shirt.",
+        "ground_truth": [
+          103.22,
+          0.81,
+          224.86,
+          143.79
+        ],
+        "prediction": [
+          95.40372670807454,
+          0.0,
+          271.30434782608694,
+          221.63333333333335
+        ],
+        "model_output": "```json\n[96, 0, 273, 218]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000163266.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: little girl in lap.",
+        "ground_truth": [
+          84.16,
+          330.9,
+          236.83,
+          526.99
+        ],
+        "prediction": [
+          136.02142857142857,
+          324.96894409937886,
+          242.68571428571428,
+          631.055900621118
+        ],
+        "model_output": "```json\n[139, 327, 248, 635]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000524710.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: third knife from bottom.",
+        "ground_truth": [
+          162.28,
+          461.87,
+          572.12,
+          537.51
+        ],
+        "prediction": [
+          104.31818181818181,
+          525.5649350649351,
+          583.1883116883117,
+          586.1688311688312
+        ],
+        "model_output": "```json\n[105, 529, 587, 590]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000477442.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: front plate.",
+        "ground_truth": [
+          232.99,
+          317.12,
+          546.88,
+          465.98
+        ],
+        "prediction": [
+          265.34161490683226,
+          347.89915966386553,
+          398.5093167701864,
+          462.8571428571429
+        ],
+        "model_output": "```json\n[267, 345, 401, 459]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000524710.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: butterknife second from bottom.",
+        "ground_truth": [
+          171.57,
+          509.46,
+          591.39,
+          564.13
+        ],
+        "prediction": [
+          108.29220779220779,
+          479.8636363636363,
+          582.1948051948052,
+          553.3831168831169
+        ],
+        "model_output": "```json\n[109, 483, 586, 557]\n```"
+      }
+    ],
+    "ATTRIBUTE_OR_OTHER": [
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000552617.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: guy whose upper body is visible.",
+        "ground_truth": [
+          248.39,
+          128.08,
+          446.15,
+          333.0
+        ],
+        "prediction": [
+          70.43650793650794,
+          49.55357142857143,
+          329.36507936507934,
+          330.0267857142857
+        ],
+        "model_output": "```json\n[71, 50, 332, 333]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000217959.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: cow head.",
+        "ground_truth": [
+          109.42,
+          131.1,
+          418.06,
+          346.84
+        ],
+        "prediction": [
+          365.71428571428567,
+          180.50420168067228,
+          520.7453416149068,
+          338.82352941176475
+        ],
+        "model_output": "```json\n[368, 179, 524, 336]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000157194.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: teens slateboarding.",
+        "ground_truth": [
+          39.15,
+          101.63,
+          296.61,
+          331.24
+        ],
+        "prediction": [
+          187.5,
+          42.8720238095238,
+          322.42063492063494,
+          236.29464285714286
+        ],
+        "model_output": "```json\n[189, 43, 325, 237]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000000716.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: person standing.",
+        "ground_truth": [
+          455.63,
+          2.16,
+          563.06,
+          204.62
+        ],
+        "prediction": [
+          406.45962732919253,
+          61.5126050420168,
+          579.3788819875776,
+          329.74789915966386
+        ],
+        "model_output": "```json\n[409, 61, 583, 327]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000558372.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: arm of the man with backpack.",
+        "ground_truth": [
+          22.72,
+          1.2,
+          161.71,
+          224.83
+        ],
+        "prediction": [
+          4.968944099378882,
+          6.1,
+          255.40372670807454,
+          428.01666666666665
+        ],
+        "model_output": "```json\n[5, 6, 257, 421]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000257804.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: head in middle.",
+        "ground_truth": [
+          148.97,
+          242.42,
+          347.47,
+          375.0
+        ],
+        "prediction": [
+          147.81746031746033,
+          80.35714285714285,
+          428.57142857142856,
+          386.3324175824175
+        ],
+        "model_output": "```json\n[149, 78, 432, 375]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000267815.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: third back black shirt sitting.",
+        "ground_truth": [
+          55.99,
+          228.16,
+          205.47,
+          436.48
+        ],
+        "prediction": [
+          121.00840336134453,
+          173.91304347826087,
+          214.78991596638656,
+          312.0496894409938
+        ],
+        "model_output": "```json\n[120, 175, 213, 314]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000550129.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: back giraffe.",
+        "ground_truth": [
+          0.0,
+          188.09,
+          169.89,
+          442.92
+        ],
+        "prediction": [
+          0.0,
+          53.23660714285714,
+          290.72023809523813,
+          438.9508928571429
+        ],
+        "model_output": "```json\n[0, 53, 289, 437]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000428117.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: pink pants.",
+        "ground_truth": [
+          0.03,
+          197.01,
+          126.09,
+          364.06
+        ],
+        "prediction": [
+          0.0,
+          206.72268907563026,
+          351.80124223602485,
+          449.74789915966386
+        ],
+        "model_output": "```json\n[0, 205, 354, 446]\n```"
+      },
+      {
+        "dataset": "rec_results_refcoco_val_outputs_phase3-online-dpo-qwen25vl-7b-local.json",
+        "image": "train2014/COCO_train2014_000000391292.jpg",
+        "question": "Please provide the bounding box coordinate of the region this sentence describes: center of the pic cow eating grass.",
+        "ground_truth": [
+          242.84,
+          183.43,
+          360.19,
+          442.91
+        ],
+        "prediction": [
+          241.49068322981367,
+          202.6890756302521,
+          572.4223602484473,
+          461.8487394957983
+        ],
+        "model_output": "```json\n[243, 201, 576, 458]\n```"
+      }
+    ]
+  },
+  "notes": [
+    "WRONG_TARGET and ATTRIBUTE_ERROR cannot be cleanly separated from prediction-vs-GT alone.",
+    "LOW_OVERLAP_SEMANTIC_OR_WRONG_TARGET is a conservative proxy bucket."
+  ]
+}

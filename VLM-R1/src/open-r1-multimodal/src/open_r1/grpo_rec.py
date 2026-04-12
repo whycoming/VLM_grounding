@@ -145,16 +145,66 @@ class LazySupervisedDataset(Dataset):
         else:
             raise ValueError(f"Unsupported file type: {data_path}")
 
+    @staticmethod
+    def _resolve_image_path(image_root: str, image_value: str) -> str:
+        normalized_root = os.path.normpath(image_root)
+        normalized_image = os.path.normpath(image_value)
+        candidates = [os.path.join(normalized_root, normalized_image)]
+
+        image_parts = normalized_image.split(os.sep)
+        root_basename = os.path.basename(normalized_root)
+        if image_parts and image_parts[0] == root_basename:
+            candidates.append(os.path.join(os.path.dirname(normalized_root), normalized_image))
+
+        candidates.append(os.path.join(normalized_root, os.path.basename(normalized_image)))
+
+        seen = set()
+        for candidate in candidates:
+            normalized_candidate = os.path.normpath(candidate)
+            if normalized_candidate in seen:
+                continue
+            seen.add(normalized_candidate)
+            if os.path.exists(normalized_candidate):
+                return normalized_candidate
+
+        raise FileNotFoundError(
+            f"Image not found for root={image_root}, image={image_value}. Tried: {sorted(seen)}"
+        )
+
     def __len__(self):
         return len(self.list_data_dict)
 
     def __getitem__(self, i):
+        def get_problem(example):
+            if "problem" in example:
+                return example["problem"]
+            if "conversations" in example:
+                human_turn = next(turn for turn in example["conversations"] if turn["from"] == "human")
+                return human_turn["value"].replace("<image>", "").strip()
+            raise KeyError("Missing `problem` and `conversations` fields.")
+
+        def get_solution(example):
+            if "solution" in example:
+                solution = example["solution"]
+            elif "conversations" in example:
+                gpt_turn = next(turn for turn in example["conversations"] if turn["from"] == "gpt")
+                solution = gpt_turn["value"]
+            else:
+                raise KeyError("Missing `solution` and `conversations` fields.")
+
+            if isinstance(solution, str):
+                normalized = solution.strip()
+                if normalized.startswith("<answer>") and normalized.endswith("</answer>"):
+                    return normalized
+                return f"<answer> {normalized} </answer>"
+            return f"<answer> {json.dumps(solution)} </answer>"
+
         # Format into conversation
         def make_conversation(example):
             return {
                 "prompt": [
                     {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": example["problem"]},
+                    {"role": "user", "content": get_problem(example)},
                 ],
             }
         QUESTION_TEMPLATE = self.question_template
@@ -166,7 +216,7 @@ class LazySupervisedDataset(Dataset):
                         "role": "user",
                         "content": [
                             {"type": "image"},
-                            {"type": "text", "text": QUESTION_TEMPLATE.format(Question=example["problem"])},
+                            {"type": "text", "text": QUESTION_TEMPLATE.format(Question=get_problem(example))},
                         ],
                     },
                 ],
@@ -175,22 +225,18 @@ class LazySupervisedDataset(Dataset):
         example = self.list_data_dict[i]
         image_root = self.script_args.image_root
         if 'image' in example:
-            image_path = os.path.join(image_root, example['image'])
-            # In case the image is not found
-            while not os.path.exists(image_path):
-                print(f"Warning: Image {image_path} not found, randomly selecting another image")
-                new_index = random.randint(0, len(self.list_data_dict)-1)
-                example = self.list_data_dict[new_index]
-                image_path = os.path.join(image_root, example['image'])
+            image_path = self._resolve_image_path(image_root, example['image'])
             image = Image.open(image_path).convert("RGB")
         else:
             image = None
+            image_path = None
         
 
         return {
             'image': image,
-            'problem': example['problem'],
-            'solution': example['solution'],
+            'image_path': [image_path] if image_path is not None else None,
+            'problem': get_problem(example),
+            'solution': get_solution(example),
             'prompt': make_conversation_image(example)['prompt'] if 'image' in example else make_conversation(example)['prompt'],
         }
 
@@ -235,7 +281,7 @@ def main(script_args, training_args, model_args):
         max_pixels=script_args.max_pixels,
         min_pixels=script_args.min_pixels,
         max_anyres_num=script_args.max_anyres_num,
-        torch_dtype=model_args.torch_dtype,
+        torch_dtype=getattr(model_args, "torch_dtype", getattr(model_args, "dtype", "bfloat16")),
     )
 
     # Train and push the model to the Hub

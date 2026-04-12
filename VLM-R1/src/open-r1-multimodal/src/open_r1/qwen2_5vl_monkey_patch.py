@@ -1,6 +1,16 @@
-
 # ----------------------- Fix the flash attention bug in the current version of transformers -----------------------
-from transformers.models.qwen2_5_vl.modeling_qwen2_5_vl import Qwen2_5_VLVisionFlashAttention2, apply_rotary_pos_emb_flashatt, flash_attn_varlen_func
+try:
+    from transformers.models.qwen2_5_vl.modeling_qwen2_5_vl import (
+        Qwen2_5_VLVisionFlashAttention2,
+        apply_rotary_pos_emb_flashatt,
+        flash_attn_varlen_func,
+    )
+    _FLASH_ATTN_PATCH_AVAILABLE = True
+except ImportError:
+    Qwen2_5_VLVisionFlashAttention2 = None
+    apply_rotary_pos_emb_flashatt = None
+    flash_attn_varlen_func = None
+    _FLASH_ATTN_PATCH_AVAILABLE = False
 import torch
 from typing import Tuple, Optional
 def qwen2_5vl_vision_flash_attn_forward(
@@ -41,6 +51,8 @@ def qwen2_5vl_vision_flash_attn_forward(
 
 
 def monkey_patch_qwen2_5vl_flash_attn():
+    if not _FLASH_ATTN_PATCH_AVAILABLE:
+        return
     Qwen2_5_VLVisionFlashAttention2.forward = qwen2_5vl_vision_flash_attn_forward
 
 
@@ -224,6 +236,5 @@ def weigths_only_load(self, path: str, map_location=None):
 
 def monkey_patch_torch_load():
     TorchCheckpointEngine.load = weigths_only_load
-
 
 
